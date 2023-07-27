@@ -1,0 +1,20 @@
+COMPILER Sing $CN
+
+CHARACTERS
+  digit      = "0123456789" .
+  letter     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"abcdefghijklmnopqrstuvwxyz".
+
+TOKENS
+  year = digit digit digit digit .
+  word = letter {letter} .
+
+IGNORE CHR(0) .. CHR(26)+ CHR(28) .. CHR (31)
+
+PRODUCTIONS
+  Sing = {Listing "."  }.
+  Listing = '"' Title '"' "(" Artist ")"[","] {"[" Date "]"} .
+  Title = word {word} .
+  Artist = word {word} .
+  Date = year .
+   
+END Sing.
