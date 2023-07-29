@@ -1,0 +1,17 @@
+COMPILER index $CN
+
+CHARACTERS
+	digit = "0123456789" .
+	letter = "abcdefghijklmnopqrstuvwxyz"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ-+, ".
+	
+TOKENS
+	word = letter{letter}[digit]{letter} .
+	parenthesis = "("letter{letter}")" .
+	page = digit{digit}{"-"digit{digit}} .
+	
+IGNORE CHR(0) .. CHR(31)
+
+PRODUCTIONS
+	index = { word {parenthesis} {page{"," (page|(word {page}))}} } EOF.
+	
+END index .
