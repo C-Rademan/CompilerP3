@@ -1,0 +1,20 @@
+COMPILER index $CN
+
+CHARACTERS
+	digit = "0123456789" .
+	letter = "abcdefghijklmnopqrstuvwxyz"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ-+".
+	space =" ".
+	hyph ="-".
+	
+TOKENS
+	phrase = letter{letter|digit}{{","}space(letter{letter|digit}|digit{digit})}.
+	pageNumber = space digit {digit} {("," space digit{digit})|("-"digit{digit})} .
+	
+	
+	
+IGNORE CHR(0) .. CHR(31)
+
+PRODUCTIONS
+	index = { phrase {"(" phrase ")"} {pageNumber {("," {phrase} pageNumber) } } } EOF .
+
+END index .
