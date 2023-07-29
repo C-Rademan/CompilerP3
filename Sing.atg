@@ -2,19 +2,16 @@ COMPILER Sing $CN
 
 CHARACTERS
   digit      = "0123456789" .
-  letter     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"abcdefghijklmnopqrstuvwxyz".
+  letter     = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"+"abcdefghijklmnopqrstuvwxyz"+" "+"'".
 
 TOKENS
-  year = digit digit digit digit .
-  word = letter {letter} .
-
+  songTitle = '"' letter{letter} '"' .
+  artistName = "(" letter {letter} ")" .
+  year = ("19"|"20") digit digit .
+  
 IGNORE CHR(0) .. CHR(26)+ CHR(28) .. CHR (31)
 
 PRODUCTIONS
-  Sing = {Listing "."  }.
-  Listing = '"' Title '"' "(" Artist ")"[","] {"[" Date "]"} .
-  Title = word {word} .
-  Artist = word {word} .
-  Date = year .
-   
+  Sing = {songTitle artistName {"," artistName} ["[" year "]"] "."} EOF.
+  
 END Sing.
