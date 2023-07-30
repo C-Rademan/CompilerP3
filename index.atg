@@ -3,8 +3,6 @@ COMPILER index $CN
 CHARACTERS
 	digit = "0123456789" .
 	letter = "abcdefghijklmnopqrstuvwxyz"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ-+".
-	space =" ".
-	hyph ="-".
 	
 TOKENS
 	phrase = letter{letter|digit}{{","}space(letter{letter|digit}|digit{digit})}.
