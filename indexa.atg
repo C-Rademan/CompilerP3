@@ -1,0 +1,25 @@
+COMPILER indexa $CN
+
+CHARACTERS
+	digit = "0123456789" .
+	letter = "abcdefghijklmnopqrstuvwxyz"+"ABCDEFGHIJKLMNOPQRSTUVWXYZ".
+	lf = CHR(10) .
+	space = " " .
+	
+TOKENS
+	word = letter {letter} ["-" digit | "++" | "#" ] .
+	page =  digit {digit} {{space}"-"{space} digit {digit}}.
+	EOL = lf .
+
+IGNORE CHR(0) .. CHR(9) + CHR(11)..CHR(31)
+
+PRODUCTIONS
+	
+	indexa = { Entry } EOF .
+	Entry = [word {"," | word | Parenthesis} Destination] EOL.
+	Parenthesis = "(" word {word} ")" .
+	Destination = (page {"," (page | (word {word} page) )} )| Directive.
+	Directive = "--" "see" word {word}.
+	
+	
+END indexa .
